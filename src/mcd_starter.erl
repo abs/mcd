@@ -50,7 +50,7 @@ init(PeerAddresses) ->
 	end,
 	NameTag = list_to_atom(lists:flatten(io_lib:format("~p", [Address]))),
 	{ { NameTag, Weight },
-	  { mcd, start_link, [Address] },
+	  { mcd, start_link, [NameTag, Address] },
 	  permanent, 10000, worker, [mcd] }
     end || [Host|_] = Addr <- PeerAddresses],
     {ok, { {one_for_all, 10, 10}, McdChildSpecs }}.
